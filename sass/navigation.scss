@@ -1,0 +1,72 @@
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.destinations-menu,
+.delay-menu,
+.search-menu {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 40px;
+}
+
+.delay-menu {
+    margin-right: 0;
+}
+
+.search-menu {
+    flex-grow: 1;
+}
+
+.destinations-menu__departure,
+.destinations-menu__arrival,
+.delay-menu__button,
+.search-menu__button {
+    background: none;
+    border: none;
+    color: $darkgray;
+    font-size: 28px;
+    line-height: 30px;
+    font-weight: 500;
+    outline-width: 1px;
+    outline-color: $lightgray;
+    transition: color 0.15s;
+
+    &:hover {
+        color: $red;
+        cursor: pointer;
+    }
+
+    &:active {
+        transform: translate(1px, 1px);
+    }
+}
+
+.delay-menu__button,
+.search-menu__button {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.search-menu__input {
+    height: 28px;
+    flex-grow: 1;
+    margin-right: 15px;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline-width: 1px;
+    outline-color: $lightgray;
+    font-size: 16px;
+    color: $darkgray;
+    font-weight: 500;
+    text-transform: uppercase;
+    
+    &::placeholder {
+        color: rgb(142, 142, 142);
+        font-size: 12px;
+        text-transform: none;
+    }
+}
