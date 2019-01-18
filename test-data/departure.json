@@ -1,0 +1,50 @@
+[
+    {
+        "time": "10:12",
+        "destination": "Киев",
+        "number": "KV 342",
+        "status": "registration"
+    },
+    {
+        "time": "11:54",
+        "destination": "Мурманск",
+        "number": "MR 412",
+        "status": "registration"
+    },
+    {
+        "time": "12:42",
+        "destination": "Амстердам",
+        "number": "AM 148",
+        "status": "canceled"
+    },
+    {
+        "time": "13:01",
+        "destination": "Прага",
+        "number": "PR 09",
+        "status": "delayed"
+    },
+    {
+        "time": "15:36",
+        "destination": "Санкт-Петербург",
+        "number": "SP 8867",
+        "status": "registration"
+    },
+    {
+        "time": "17:18",
+        "destination": "Лос-Анжелес",
+        "number": "LA 1919",
+        "status": "delayed"
+    },
+    {
+        "time": "22:22",
+        "destination": "Ларнака",
+        "number": "LK 704",
+        "status": "registration"
+    },
+    {
+        "time": "24:08",
+        "destination": "Мюнхен",
+        "number": "MN 511",
+        "status": "canceled"
+    }
+]

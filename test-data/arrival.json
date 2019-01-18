@@ -1,0 +1,62 @@
+[
+    {
+        "time": "08:08",
+        "departure": "Саратов",
+        "number": "SR 99",
+        "status": "landed"
+    },
+    {
+        "time": "11:14",
+        "departure": "Анапа",
+        "number": "AN 345",
+        "status": "landed"
+    },
+    {
+        "time": "11:42",
+        "departure": "Гамбург",
+        "number": "GB 188",
+        "status": "expected"
+    },
+    {
+        "time": "13:41",
+        "departure": "Нью-Йорк",
+        "number": "NY 909",
+        "status": "delayed"
+    },
+    {
+        "time": "16:31",
+        "departure": "Сочи",
+        "number": "SC 672",
+        "status": "canceled"
+    },
+    {
+        "time": "18:18",
+        "departure": "Сеул",
+        "number": "SE 159",
+        "status": "expected"
+    },
+    {
+        "time": "20:56",
+        "departure": "Калининград",
+        "number": "KL 740",
+        "status": "delayed"
+    },
+    {
+        "time": "21:28",
+        "departure": "Лондон",
+        "number": "LD 322",
+        "status": "expected"
+    },
+    {
+        "time": "22:22",
+        "departure": "Пекин",
+        "number": "PN 55",
+        "status": "canceled"
+    },
+    {
+        "time": "23:38",
+        "departure": "Бангкок",
+        "number": "BC 1102",
+        "status": "expected"
+    }
+]

@@ -21,15 +21,11 @@
     flex-grow: 1;
 }
 
-.destinations-menu__departure,
-.destinations-menu__arrival,
-.delay-menu__button,
-.search-menu__button {
+.button {
     background: none;
     border: none;
     color: $darkgray;
     font-size: 28px;
-    line-height: 30px;
     font-weight: 500;
     outline-width: 1px;
     outline-color: $lightgray;
@@ -42,6 +38,10 @@
 
     &:active {
         transform: translate(1px, 1px);
+    }
+
+    &--active {
+        color: $red;
     }
 }
 
