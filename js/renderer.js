@@ -1,6 +1,6 @@
 import {schedule} from './main';
 
-function createElement(name, classList, content) {
+function createNode(name, classList, content) {
     const element = document.createElement(name);
     element.classList.add(classList);
     element.textContent = content;
@@ -8,13 +8,14 @@ function createElement(name, classList, content) {
 }
 
 export default (data) => {
-    const tableRow = createElement(`div`, `schedule__row`);
+    const tableRow = createNode(`div`, `schedule__row`);
     for(let key in data) {
-        if (key === `departure` || key === `destination`) {
-            tableRow.appendChild(createElement(`span`, `schedule__airport`, data[key]));
-            continue;
+        let nodeClass = (key === `departure` || key === `destination`) ? `airport`: key;
+        const tableCell = createNode(`span`, `schedule__${nodeClass}`, data[key]);
+        if (data[key] === `canceled`) {
+            tableCell.classList.add(`schedule__status--canceled`);
         }
-        tableRow.appendChild(createElement(`span`, `schedule__${key}`, data[key]));
+        tableRow.appendChild(tableCell);
     }
     schedule.appendChild(tableRow);
 };

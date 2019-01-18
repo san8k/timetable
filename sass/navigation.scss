@@ -1,8 +1,9 @@
 .navigation {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end;
     flex-wrap: wrap;
+    margin-bottom: 15px;
 }
 
 .destinations-menu,
@@ -25,11 +26,10 @@
     background: none;
     border: none;
     color: $darkgray;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 500;
     outline-width: 1px;
     outline-color: $lightgray;
-    transition: color 0.15s;
 
     &:hover {
         color: $red;
@@ -41,8 +41,21 @@
     }
 
     &--active {
-        color: $red;
+        color: #fff;
+        background-color: $red;
     }
+
+    &--active:hover {
+        color: #fff;
+    }
+}
+
+.destinations-menu__departure {
+    margin-left: -10px;
+}
+
+.destinations-menu__arrival {
+    margin-left: 10px;
 }
 
 .delay-menu__button,
@@ -51,10 +64,19 @@
     font-weight: 300;
 }
 
+.delay-menu__button {
+    margin-right: -8px;
+}
+
+.search-menu__button {
+    margin-bottom: -5px;
+}
+
 .search-menu__input {
     height: 28px;
     flex-grow: 1;
     margin-right: 15px;
+    margin-bottom: 5px;
     border: none;
     border-bottom: 1px solid #000;
     outline-width: 1px;
