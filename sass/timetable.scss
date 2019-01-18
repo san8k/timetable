@@ -1,11 +1,10 @@
 .timetable {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 10fr;
+    grid-template-rows: 1fr auto;
     grid-gap: 10px;
 
-    width: 70%;
-    min-height: 80vh;
+    width: 80%;
     margin: 30px auto;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
 }

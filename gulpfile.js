@@ -8,6 +8,7 @@ const del = require(`del`);
 const browserSync = require('browser-sync').create();
 const rollup = require(`gulp-better-rollup`);
 const sourcemaps = require(`gulp-sourcemaps`);
+const svgmin = require('gulp-svgmin');
 
 const clean = () => {
     return del([`dist/*`]);
@@ -35,8 +36,14 @@ const scripts = () => {
     .pipe(gulp.dest(`./dist/js`))
     .pipe(browserSync.stream());
   };
+
+const svg = () => {
+    return gulp.src('./svg/*.svg')
+    .pipe(svgmin())
+    .pipe(gulp.dest('./dist/img'));
+}
   
-  const watch = () => {
+const watch = () => {
     browserSync.init({
       server: {
           baseDir: "./"
@@ -44,8 +51,9 @@ const scripts = () => {
     });
     gulp.watch(`./sass/**/*.scss`, styles);
     gulp.watch(`./js/**/*.js`, scripts);
+    gulp.watch(`./svg/**/*.svg`, svg);
     gulp.watch(`./*.html`, browserSync.reload);
-  };
+};
 
-gulp.task(`build`, gulp.series(clean, gulp.parallel(styles, scripts)));
+gulp.task(`build`, gulp.series(clean, gulp.parallel(styles, scripts, svg)));
 gulp.task(`serve`, gulp.series(`build`, watch));

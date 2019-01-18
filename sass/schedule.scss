@@ -2,6 +2,7 @@
     display: table;
     border-collapse: collapse;
     table-layout: fixed;
+    width: 100%;
 }
 
 .schedule__row {
@@ -25,7 +26,6 @@
     font-size: 22px;
     font-weight: 200;
     color: $darkgray;
-    // border-right: 1px dashed green;
 }
 
 .schedule__time {

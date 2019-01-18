@@ -1,60 +1,39 @@
-import loadData from './loader';
-import renderData from './renderer';
+import {getData, showSchedule} from './renderer';
+import search from './search';
 
 const timetable = document.querySelector(`.timetable`)
 const schedule = timetable.querySelector(`.schedule`);
 const departureButton = timetable.querySelector(`.destinations-menu__departure`);
 const arrivalButton = timetable.querySelector(`.destinations-menu__arrival`);
+const delayedCheckbox = timetable.querySelector(`.delay-menu__checkbox`);
 const searchInput = timetable.querySelector(`.search-menu__input`);
 const searchButton = timetable.querySelector(`.search-menu__button`);
-const delayButton = timetable.querySelector(`.delay-menu__button`);
 
-function search() {
-    searchButton.addEventListener(`click`, () => {
-        if(searchInput.value) {
-            console.log(searchInput.value.toUpperCase());
-        }
-    });
-    searchInput.addEventListener(`keydown`, function(evt) {
-        if (this.value && evt.key === `Enter`) {
-            console.log(this.value.toUpperCase());
-        }
-    });
-};
-
-const showData = async (url) => {
-    try {
-        const schedule = await loadData(url);
-        schedule.forEach((flight) => {
-            renderData(flight);
-        });
-    } catch(err) {
-        console.error(err);
-    }
-};
-
-function onDepartureClick() {
+async function onDepartureClick() {
     this.classList.add(`button--active`);
     arrivalButton.classList.remove(`button--active`);
-    schedule.innerHTML = ``;
-    showData(`../test-data/departure.json`);
+    await getData(`../test-data/departure.json`);
+    showSchedule();
 };
 
-function onArrivalClick() {
+async function onArrivalClick() {
     departureButton.classList.remove(`button--active`);
     this.classList.add(`button--active`);
-    schedule.innerHTML = ``;
-    showData(`../test-data/arrival.json`);
+    await getData(`../test-data/arrival.json`);
+    showSchedule();
 };
 
 departureButton.addEventListener(`click`, onDepartureClick);
 arrivalButton.addEventListener(`click`, onArrivalClick);
+delayedCheckbox.addEventListener(`change`, () => {
+    showSchedule();
+});
 
-
-window.onload = () => {
-    showData(`../test-data/departure.json`);
+window.onload = async () => {
+    await getData(`../test-data/departure.json`);
+    showSchedule();
     departureButton.classList.add(`button--active`);
+    search();
 }
 
-
-export {schedule};
+export {searchButton, searchInput, schedule, delayedCheckbox};

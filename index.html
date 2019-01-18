@@ -20,11 +20,12 @@
                     <button class="destinations-menu__arrival button">Прилет</button>
                 </div>
                 <div class="search-menu">
-                    <input type="text" name="search" placeholder="Поиск по номеру рейса" class="search-menu__input">
-                    <button class="search-menu__button button">Найти</button>
+                    <input type="text" name="search" id ="search" placeholder="Поиск по номеру рейса" class="search-menu__input">
+                    <button class="search-menu__button button" aria-label="Найти"></button>
                 </div>
                 <div class="delay-menu">
-                    <button class="delay-menu__button button">Задержанные рейсы</button>
+                    <input type="checkbox" name="delayed" id="delayed" class="delay-menu__checkbox">
+                    <label for="delayed" class="delay-menu__label">Показать задержанные рейсы</label>
                 </div>                
             </nav>
             <div class="schedule">
