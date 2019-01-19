@@ -35,16 +35,21 @@
     color: $darkgray;
     font-size: 52px;
     font-weight: 700;
-    outline-width: 1px;
-    outline-color: $lightgray;
+    outline: none;
+
+    &:focus {
+        box-shadow: 0 -2px 0 0 $red inset;
+    }
 
     &:hover {
         color: $red;
         cursor: pointer;
+        
     }
 
     &:active {
         transform: translate(1px, 1px);
+        box-shadow: none;
     }
 
     &--active {
@@ -76,6 +81,10 @@
 
 .search-menu__button {
     margin-bottom: -5px;
+
+    &:focus {
+        box-shadow: none;
+    }    
 }
 
 .search-menu__input {
@@ -86,12 +95,16 @@
     margin-bottom: 5px;
     border: none;
     border-bottom: 1px solid #000;
-    outline-width: 1px;
-    outline-color: $lightgray;
+    outline: none;
     font-size: 16px;
     color: $darkgray;
     font-weight: 500;
     text-transform: uppercase;
+
+    &:focus {
+        box-shadow: 0 -2px 0 0 $red inset;
+        border-bottom: none;
+    }
     
     &::placeholder {
         color: rgb(142, 142, 142);
