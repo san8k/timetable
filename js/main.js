@@ -31,6 +31,7 @@ async function onArrivalClick() {
 departureButton.addEventListener(`click`, onDepartureClick);
 arrivalButton.addEventListener(`click`, onArrivalClick);
 delayedCheckbox.addEventListener(`change`, () => {
+    searchInput.value = ``;
     debouncedSchedule();
 });
 
