@@ -19,7 +19,7 @@ return gulp.src(`./sass/style.scss`)
     .pipe(sass())
     .pipe(rename(`style.css`))
     .pipe(autoprefixer({
-    browsers: ['> 0.1%'],
+    browsers: ['> 0.05%'],
     cascade: false
     }))
     .pipe(cleanCSS({level: 2}))

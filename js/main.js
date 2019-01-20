@@ -2,9 +2,11 @@ import {getData, showSchedule} from './renderer';
 import search from './search';
 import debounce from './debounce';
 
+const AIRPORT_IATA_CODE = `ARH`; // example: ARH, TOF, DME, VKO, SVO, AAQ, LED
+
 const Url = {
-    DEPARTURE: `http://aviation-edge.com/v2/public/timetable?key=ea377a-dc8bf1&iataCode=ARH&type=departure`,
-    ARRIVAL: `http://aviation-edge.com/v2/public/timetable?key=ea377a-dc8bf1&iataCode=ARH&type=arrival`
+    DEPARTURE: `http://aviation-edge.com/v2/public/timetable?key=ea377a-dc8bf1&iataCode=${AIRPORT_IATA_CODE}&type=departure`,
+    ARRIVAL: `http://aviation-edge.com/v2/public/timetable?key=ea377a-dc8bf1&iataCode=${AIRPORT_IATA_CODE}&type=arrival`
 };
 
 const timetable = document.querySelector(`.timetable`)

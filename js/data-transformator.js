@@ -8,7 +8,7 @@ export default {
         active: 'В пути',
         diverted: 'Переадресован',
         redirected: 'Перенаправлен',
-        unknow: 'Статус неизвестен',
+        unknown: 'Статус неизвестен',
         incident: 'Проблема на борту'
     },
     airportCodeToCity: {
@@ -16,6 +16,9 @@ export default {
         DME: 'Москва - Домодедово',
         VKO: 'Москва - Внуково',
         LED: 'Санкт-Петербург',
-        NNM: 'Нарян Мар'
+        NNM: 'Нарян Мар',
+        ARH: 'Архангельск',
+        TOF: 'Томск',
+        AAQ: 'Анапа'
     }
 };

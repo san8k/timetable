@@ -1,6 +1,6 @@
 import {schedule, delayedCheckbox} from './main';
 import loadData from './loader';
-import apiDataToTranslate from './dataTransformator';
+import apiDataToTranslate from './data-transformator';
 
 export const createNewElement = (name, classList, content) => {
     const element = document.createElement(name);
@@ -24,8 +24,8 @@ export const renderData = (data) => {
                         currentStatus = `delayed`;
                     }
                     tableCell = createNewElement(`span`, `schedule__status`, currentStatus);
-                    if (data[key] === `canceled`) {
-                        tableCell.classList.add(`schedule__status--canceled`);
+                    if (data[key] === `cancelled`) {
+                        tableCell.classList.add(`schedule__status--cancelled`);
                     }
                     break;
                 case `departure`:
@@ -59,8 +59,8 @@ export const renderData = (data) => {
                         currentStatus = `delayed`;
                     }
                     tableCell = createNewElement(`span`, `schedule__status`, currentStatus);
-                    if (data[key] === `canceled`) {
-                        tableCell.classList.add(`schedule__status--canceled`);
+                    if (data[key] === `cancelled`) {
+                        tableCell.classList.add(`schedule__status--cancelled`);
                     }
                     break;                
                 case `departure`:
