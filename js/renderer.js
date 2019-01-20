@@ -1,14 +1,6 @@
 import {schedule, delayedCheckbox} from './main';
 import loadData from './loader';
-
-const responseStatusToRussian = {
-    delayed: 'Задерживается',
-    scheduled: 'По расписанию',
-    landed: 'Приземлился',
-    canceled: 'Отменен',
-    registration: 'Идет регистрация',
-    active: 'В пути'
-};
+import apiDataToTranslate from './dataTransformator';
 
 export const createNewElement = (name, classList, content) => {
     const element = document.createElement(name);
@@ -27,11 +19,9 @@ export const renderData = (data) => {
             let tableCell;
             switch (key) {
                 case `status`:
-                    let currentStatus;
+                    let currentStatus = data[key];
                     if (data.departure.delay) {
                         currentStatus = `delayed`;
-                    } else {
-                        currentStatus = data[key];
                     }
                     tableCell = createNewElement(`span`, `schedule__status`, currentStatus);
                     if (data[key] === `canceled`) {
@@ -48,15 +38,12 @@ export const renderData = (data) => {
                     break;
                 case `flight`:
                     tableCell = createNewElement(`span`, `schedule__number`, data[key].iataNumber);
+                    data.jopa = `333`;
             }
-
-            
             if (tableCell) {
                 tableRow.appendChild(tableCell);
             }
-
         }
-
         const statusCell = tableRow.firstChild.cloneNode(true);
         tableRow.removeChild(tableRow.firstChild);
         tableRow.appendChild(statusCell);
@@ -68,11 +55,9 @@ export const renderData = (data) => {
             let tableCell;
             switch (key) {
                 case `status`:
-                    let currentStatus;
+                    let currentStatus = data[key];
                     if (data.arrival.delay) {
                         currentStatus = `delayed`;
-                    } else {
-                        currentStatus = data[key];
                     }
                     tableCell = createNewElement(`span`, `schedule__status`, currentStatus);
                     if (data[key] === `canceled`) {
@@ -90,13 +75,10 @@ export const renderData = (data) => {
                 case `flight`:
                     tableCell = createNewElement(`span`, `schedule__number`, data[key].iataNumber);
             }
-
-            
             if (tableCell) {
                 tableRow.appendChild(tableCell);
             }
         }
-
         const statusCell = tableRow.firstChild.cloneNode(true);
         tableRow.removeChild(tableRow.firstChild);
         tableRow.appendChild(statusCell);
@@ -105,8 +87,10 @@ export const renderData = (data) => {
         tableRow.insertBefore(destCell, tableRow.children[1]);
     }
     
-    
-    tableRow.lastChild.textContent = responseStatusToRussian[tableRow.lastChild.textContent];
+    tableRow.lastChild.textContent = apiDataToTranslate.responseStatusToRussian[tableRow.lastChild.textContent] ||
+    tableRow.lastChild.textContent;
+    tableRow.children[1].textContent = apiDataToTranslate.airportCodeToCity[tableRow.children[1].textContent] ||
+    `Аэропорт: ${tableRow.children[1].textContent}`;
     schedule.appendChild(tableRow);
 };
 
@@ -122,9 +106,17 @@ export const getData = async (url) => {
 
 export const showSchedule = (specialData = flightsTimetable.currentSchedule) => {
     let data = specialData;
+    const filterDelayed = (flight) => {
+        if (flight.type === `departure` && flight.departure.delay) {
+            return flight;
+        }
+        if (flight.type === `arrival` && flight.arrival.delay) {
+            return flight;
+        }
+    };
     schedule.innerHTML = ``;
     if (delayedCheckbox.checked) {
-        data = specialData.filter((flight) => flight.status === `delayed`);
+        data = data.filter(filterDelayed);
     }
     data.forEach((flight) => {
         renderData(flight);
