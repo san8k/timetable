@@ -12,7 +12,7 @@ const showSearchFail = () => {
 }
 
 const onSearch = (elem) => {
-    const findedFlights = flightsTimetable.currentSchedule.filter((it) => it.number.includes(elem.value.toUpperCase().trim()));
+    const findedFlights = flightsTimetable.currentSchedule.filter((it) => it.flight.iataNumber.includes(elem.value.toUpperCase().trim()));
     if (findedFlights.length > 0) {
         showSchedule(findedFlights);
     } else {

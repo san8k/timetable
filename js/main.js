@@ -3,8 +3,8 @@ import search from './search';
 import debounce from './debounce';
 
 const Url = {
-    DEPARTURE: `http://aviation-edge.com/v2/public/timetable?key=ea377a-dc8bf1&iataCode=TOF&type=departure`,
-    ARRIVAL: `http://aviation-edge.com/v2/public/timetable?key=ea377a-dc8bf1&iataCode=TOF&type=arrival`
+    DEPARTURE: `http://aviation-edge.com/v2/public/timetable?key=ea377a-dc8bf1&iataCode=ARH&type=departure`,
+    ARRIVAL: `http://aviation-edge.com/v2/public/timetable?key=ea377a-dc8bf1&iataCode=ARH&type=arrival`
 };
 
 const timetable = document.querySelector(`.timetable`)

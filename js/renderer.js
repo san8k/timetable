@@ -3,10 +3,11 @@ import loadData from './loader';
 
 const responseStatusToRussian = {
     delayed: 'Задерживается',
-    expected: 'Ожидается',
+    scheduled: 'По расписанию',
     landed: 'Приземлился',
     canceled: 'Отменен',
-    registration: 'Идет регистрация'
+    registration: 'Идет регистрация',
+    active: 'В пути'
 };
 
 export const createNewElement = (name, classList, content) => {
@@ -22,71 +23,90 @@ export const renderData = (data) => {
     if (data.type === `departure`) {
     
         for(let key in data) {
-            // let nodeClass = (key === `departure` || key === `destination`) ? `airport`: key;
-            // const tableCell = createNewElement(`span`, `schedule__${key}`, data[key]);
-            // if (data[key] === `canceled`) {
-            //     tableCell.classList.add(`schedule__status--canceled`);
-            // }
 
-            // let tableCell;
+            let tableCell;
             switch (key) {
                 case `status`:
-                    // tableCell = createNewElement(`span`, `schedule__status`, data[key]);
+                    let currentStatus;
                     if (data.departure.delay) {
-                        console.log(`delayed ++++++++`)
+                        currentStatus = `delayed`;
                     } else {
-                        console.log(data[key]);
+                        currentStatus = data[key];
                     }
-                    
+                    tableCell = createNewElement(`span`, `schedule__status`, currentStatus);
+                    if (data[key] === `canceled`) {
+                        tableCell.classList.add(`schedule__status--canceled`);
+                    }
                     break;
                 case `departure`:
-                    console.log(data[key].scheduledTime);           
+                    let hours = new Date(data[key].scheduledTime).getHours();
+                    let minutes = new Date(data[key].scheduledTime).getMinutes().toString().length < 2 ? `0${new Date(data[key].scheduledTime).getMinutes()}` : new Date(data[key].scheduledTime).getMinutes();
+                    tableCell = createNewElement(`span`, `schedule__time`, `${hours}:${minutes}`);
                     break;
                 case `arrival`:
-                    console.log(data[key].iataCode);
+                    tableCell = createNewElement(`span`, `schedule__airport`, data[key].iataCode);
                     break;
                 case `flight`:
-                    console.log(data[key].iataNumber);
+                    tableCell = createNewElement(`span`, `schedule__number`, data[key].iataNumber);
             }
 
+            
+            if (tableCell) {
+                tableRow.appendChild(tableCell);
+            }
 
-            // console.log(`${new Date(data.departure.scheduledTime).getHours()}:${new Date(data.departure.scheduledTime).getMinutes()}`);
-            // tableRow.appendChild(tableCell);
         }
+
+        const statusCell = tableRow.firstChild.cloneNode(true);
+        tableRow.removeChild(tableRow.firstChild);
+        tableRow.appendChild(statusCell);
+
     } else if (data.type === `arrival`) {
 
         for(let key in data) {
-            // let nodeClass = (key === `departure` || key === `destination`) ? `airport`: key;
-            // const tableCell = createNewElement(`span`, `schedule__${key}`, data[key]);
-            // if (data[key] === `canceled`) {
-            //     tableCell.classList.add(`schedule__status--canceled`);
-            // }
 
-            // let tableCell;
+            let tableCell;
             switch (key) {
                 case `status`:
-                    // tableCell = createNewElement(`span`, `schedule__status`, data[key]);
+                    let currentStatus;
                     if (data.arrival.delay) {
-                        console.log(`delayed ++++++++`)
+                        currentStatus = `delayed`;
                     } else {
-                        console.log(data[key]);
+                        currentStatus = data[key];
                     }
-                    
+                    tableCell = createNewElement(`span`, `schedule__status`, currentStatus);
+                    if (data[key] === `canceled`) {
+                        tableCell.classList.add(`schedule__status--canceled`);
+                    }
+                    break;                
+                case `departure`:
+                    tableCell = createNewElement(`span`, `schedule__airport`, data[key].iataCode);
                     break;
                 case `arrival`:
-                    console.log(data[key].scheduledTime);           
-                    break;
-                case `departure`:
-                    console.log(data[key].iataCode);
+                    let hours = new Date(data[key].scheduledTime).getHours();
+                    let minutes = new Date(data[key].scheduledTime).getMinutes().toString().length < 2 ? `0${new Date(data[key].scheduledTime).getMinutes()}` : new Date(data[key].scheduledTime).getMinutes();
+                    tableCell = createNewElement(`span`, `schedule__time`, `${hours}:${minutes}`);
                     break;
                 case `flight`:
-                    console.log(data[key].iataNumber);
+                    tableCell = createNewElement(`span`, `schedule__number`, data[key].iataNumber);
+            }
+
+            
+            if (tableCell) {
+                tableRow.appendChild(tableCell);
             }
         }
 
+        const statusCell = tableRow.firstChild.cloneNode(true);
+        tableRow.removeChild(tableRow.firstChild);
+        tableRow.appendChild(statusCell);
+        const destCell = tableRow.firstChild.cloneNode(true);
+        tableRow.removeChild(tableRow.firstChild);
+        tableRow.insertBefore(destCell, tableRow.children[1]);
     }
     
-    // tableRow.lastChild.textContent = responseStatusToRussian[tableRow.lastChild.textContent];
+    
+    tableRow.lastChild.textContent = responseStatusToRussian[tableRow.lastChild.textContent];
     schedule.appendChild(tableRow);
 };
 
