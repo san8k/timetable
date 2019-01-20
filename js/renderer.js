@@ -38,7 +38,6 @@ export const renderData = (data) => {
                     break;
                 case `flight`:
                     tableCell = createNewElement(`span`, `schedule__number`, data[key].iataNumber);
-                    data.jopa = `333`;
             }
             if (tableCell) {
                 tableRow.appendChild(tableCell);
