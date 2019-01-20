@@ -2,6 +2,11 @@ import {getData, showSchedule} from './renderer';
 import search from './search';
 import debounce from './debounce';
 
+const Url = {
+    DEPARTURE: `http://aviation-edge.com/v2/public/timetable?key=ea377a-dc8bf1&iataCode=TOF&type=departure`,
+    ARRIVAL: `http://aviation-edge.com/v2/public/timetable?key=ea377a-dc8bf1&iataCode=TOF&type=arrival`
+};
+
 const timetable = document.querySelector(`.timetable`)
 const schedule = timetable.querySelector(`.schedule`);
 const departureButton = timetable.querySelector(`.destinations-menu__departure`);
@@ -16,7 +21,7 @@ async function onDepartureClick() {
     searchInput.value = ``;
     this.classList.add(`button--active`);
     arrivalButton.classList.remove(`button--active`);
-    await getData(`../test-data/departure.json`);
+    await getData(Url.DEPARTURE);
     debouncedSchedule();
 };
 
@@ -24,7 +29,7 @@ async function onArrivalClick() {
     searchInput.value = ``;
     departureButton.classList.remove(`button--active`);
     this.classList.add(`button--active`);
-    await getData(`../test-data/arrival.json`);
+    await getData(Url.ARRIVAL);
     debouncedSchedule();
 };
 
@@ -36,7 +41,7 @@ delayedCheckbox.addEventListener(`change`, () => {
 });
 
 window.onload = async () => {
-    await getData(`../test-data/departure.json`);
+    await getData(Url.DEPARTURE);
     showSchedule();
     departureButton.classList.add(`button--active`);
     search();

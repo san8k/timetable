@@ -18,15 +18,75 @@ export const createNewElement = (name, classList, content) => {
 
 export const renderData = (data) => {
     const tableRow = createNewElement(`div`, `schedule__row`);
-    for(let key in data) {
-        let nodeClass = (key === `departure` || key === `destination`) ? `airport`: key;
-        const tableCell = createNewElement(`span`, `schedule__${nodeClass}`, data[key]);
-        if (data[key] === `canceled`) {
-            tableCell.classList.add(`schedule__status--canceled`);
+
+    if (data.type === `departure`) {
+    
+        for(let key in data) {
+            // let nodeClass = (key === `departure` || key === `destination`) ? `airport`: key;
+            // const tableCell = createNewElement(`span`, `schedule__${key}`, data[key]);
+            // if (data[key] === `canceled`) {
+            //     tableCell.classList.add(`schedule__status--canceled`);
+            // }
+
+            // let tableCell;
+            switch (key) {
+                case `status`:
+                    // tableCell = createNewElement(`span`, `schedule__status`, data[key]);
+                    if (data.departure.delay) {
+                        console.log(`delayed ++++++++`)
+                    } else {
+                        console.log(data[key]);
+                    }
+                    
+                    break;
+                case `departure`:
+                    console.log(data[key].scheduledTime);           
+                    break;
+                case `arrival`:
+                    console.log(data[key].iataCode);
+                    break;
+                case `flight`:
+                    console.log(data[key].iataNumber);
+            }
+
+
+            // console.log(`${new Date(data.departure.scheduledTime).getHours()}:${new Date(data.departure.scheduledTime).getMinutes()}`);
+            // tableRow.appendChild(tableCell);
         }
-        tableRow.appendChild(tableCell);
+    } else if (data.type === `arrival`) {
+
+        for(let key in data) {
+            // let nodeClass = (key === `departure` || key === `destination`) ? `airport`: key;
+            // const tableCell = createNewElement(`span`, `schedule__${key}`, data[key]);
+            // if (data[key] === `canceled`) {
+            //     tableCell.classList.add(`schedule__status--canceled`);
+            // }
+
+            // let tableCell;
+            switch (key) {
+                case `status`:
+                    // tableCell = createNewElement(`span`, `schedule__status`, data[key]);
+                    if (data.arrival.delay) {
+                        console.log(`delayed ++++++++`)
+                    } else {
+                        console.log(data[key]);
+                    }
+                    
+                    break;
+                case `arrival`:
+                    console.log(data[key].scheduledTime);           
+                    break;
+                case `departure`:
+                    console.log(data[key].iataCode);
+                    break;
+                case `flight`:
+                    console.log(data[key].iataNumber);
+            }
+        }
+
     }
-    tableRow.lastChild.textContent = responseStatusToRussian[tableRow.lastChild.textContent];
+    
+    // tableRow.lastChild.textContent = responseStatusToRussian[tableRow.lastChild.textContent];
     schedule.appendChild(tableRow);
 };
 
